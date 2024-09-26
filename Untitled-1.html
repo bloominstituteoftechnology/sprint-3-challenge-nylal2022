@@ -47,120 +47,84 @@
     
 
 // 👉 CHALLENGE 1 - Integers
-class Integers {
-  constructor(...args) {
-    this.ints = [...args];
-  }
+ class PeterPan {
+    constructor(name) {
+        this.name = name;
+        this.age = 0;
+    }
 
-  getAll() {
-    return this.ints;
-  }
-
-  getEvens() {
-    return this.ints.filter(num => num % 2 === 0);
-  }
-
-  getNegatives() {
-    return this.ints.filter(num => num < 0);
-  }
-
-  getAllSquared() {
-    return this.ints.map(num => num * num);
-  }
-
-  pop() {
-    return this.ints.pop();
-  }
-
-  push(num) {
-    this.ints.push(num);
-    return this.ints;
-  }
-
-  getEveryNth(n) {
-    return this.ints.filter((_, index) => index % n === 0);
-  }
-
-  getAllReversed() {
-    return this.ints.slice().reverse();
-  }
+    ageGracefully() {
+        if (this.age < 12) {
+            this.age += 1;
+        }
+    }
 }
 
-// 👉 CHALLENGE 2 - NerfGun
-class NerfGun {
-  constructor(totalProjectiles) {
-    this.maxCapacity = totalProjectiles;
-    this.currentCapacity = totalProjectiles;
-    this.safetyOn = true;
-  }
-
-  shoot() {
-    if (this.currentCapacity > 0 && !this.safetyOn) {
-      this.currentCapacity--;
-      return "Bang!";
-    } else {
-      return "Click!";
+    // 👉 CHALLENGE 2
+    class AirPlane {
+    constructor(model) {
+        this.model = model;
+        this.altitude = 0;
     }
-  }
 
-  reload(number) {
-    if (typeof number !== "number" || number <= 0) {
-      return "Error reloading!";
-    } else {
-      this.currentCapacity = Math.min(this.maxCapacity, this.currentCapacity + number);
-      return `${this.currentCapacity} projectiles left!`;
+    up(meters) {
+        this.altitude += meters;
+        return this.altitude;
     }
-  }
 
-  toggleSafety() {
-    this.safetyOn = !this.safetyOn;
-    return this.safetyOn ? "Safety enabled!" : "Safety disabled!";
-  }
+    down(meters) {
+        if (this.altitude - meters < 0) {
+            this.altitude = 0;
+            return "CRASH!";
+        } else {
+            this.altitude -= meters;
+            return this.altitude;
+        }
+    }
 }
 
-// 👉 CHALLENGE 3 - EBook
-class EBook {
-  constructor(text, pageSize) {
-    this.text = text;
-    this.pageSize = pageSize;
-    this.currentPage = 0;
-  }
 
-  next() {
-    const nextPage = this.text.slice(this.currentPage, this.currentPage + this.pageSize);
-    this.currentPage += this.pageSize;
-    return nextPage.length > 0 ? nextPage : null;
-  }
+    // 👉 CHALLENGE 3
+    class Bulb {
+    constructor() {
+        this.isOn = false; // Initial value of isOn is false
+    }
+
+    turnOn() {
+        this.isOn = true;
+        return "You turned the bulb ON";
+    }
+
+    turnOff() {
+        this.isOn = false;
+        return "You turned the bulb OFF";
+    }
+
+    toggle() {
+        this.isOn = !this.isOn;
+        return this.isOn ? "You turned the bulb ON" : "You turned the bulb OFF";
+    }
 }
 
-// 👉 CHALLENGE 4 - AntFarm
-class AntFarm {
-  constructor(...ants) {
-    this.ants = ants.map(name => ({ name, health: 100 }));
-  }
 
-  work() {
-    if (this.ants.length === 0) {
-      return "No ants here. Did you work them to death?";
+    // 👉 CHALLENGE 4
+    class CountDown {
+    constructor(start) {
+        this.current = start; // Initialize the countdown starting number
     }
-    this.ants.forEach(ant => {
-      ant.health -= 20;
-      if (ant.health <= 0) {
-        this.ants.splice(this.ants.indexOf(ant), 1);
-      }
-    });
-    return `${this.ants.length} ants starting work!`;
-  }
 
-  feed(name) {
-    const ant = this.ants.find(ant => ant.name === name);
-    if (ant) {
-      ant.health += 15;
-      return "Yum!";
-    } else {
-      return `${name} not found!`;
+    count() {
+        if (this.current > 0) {
+            const result = `${this.current}!`; // Return the current number with "!"
+            this.current--; // Decrement the current count
+            return result;
+        } else if (this.current === 0) {
+            this.current--; // Prepare for the next call after liftoff
+            return "Liftoff!"; // Return "Liftoff!" when reaching zero
+        } else {
+            return null; // Return null after liftoff
+        }
     }
-  }
 }
 
     // 🧪 TESTS, do not make any changes below this line ===================
